@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html,
+body {
+    font-size: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+div#app {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+:root {
+    --darkest: #000009;
+    --darker: #3c4848;
+    --neutral: #6c7676;
+    --light: #9ba3a4;
+    --lightest: #ecf8f6;
+}
+
+header {
+    height: max-content;
+}
+
+main {
+    background: var(--lightest);
+    flex-grow: 1;
+}
+
+/* Animations */
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-in-from-right {
+    animation: fadeInFromRight 1.5s ease-in-out;
+}
+
+@keyframes fadeInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+.fade-pulse {
+    position: absolute;
+    top: 0;
+    right: 0%;
+
+    width: 20%;
+
+    transition: all 1s ease-in-out;
+    animation: fade-pulse 3s linear infinite alternate;
+}
+
+@keyframes fade-pulse {
+    0% {
+        transform: translate(0, 0);
+        opacity: 30%;
+    }
+    100% {
+        transform: translate(200% 200%);
+        opacity: 60%;
+    }
+}
