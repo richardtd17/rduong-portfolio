@@ -1,4 +1,6 @@
 * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
 }
@@ -26,7 +28,8 @@ div#app {
     --darker: #3c4848;
     --neutral: #6c7676;
     --light: #8E98AF;;
-    --lightest: #ecf8f6;
+    --lightest-former: #ecf8f6;
+    --lightest: #FFF;
 
     --side-menu-width: 50px;
 }
@@ -38,6 +41,35 @@ header {
 main {
     background: var(--lightest);
     flex-grow: 1;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: 0;
+    background: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.light-round-btn {
+    background-color: var(--light);
+    color: var(--lightest);
+    font-weight: 500;
+
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.light-round-btn:hover {
+    background-color: var(--lightest);
+    border: 1px solid var(--light);
+    color: var(--light);
 }
 
 /* Animations */
@@ -89,5 +121,66 @@ main {
     100% {
         transform: translate(200% 200%);
         opacity: 60%;
+    }
+}
+
+.smooth-bounce {
+    animation: smooth-bounce 1s ease-in-out infinite;
+}
+
+@keyframes smooth-bounce {
+    0% {
+        opacity: 100%;
+    }
+
+    10%, 90% {
+        opacity: 95%;
+        transform: translateY(-5px);
+    }
+
+    20%, 80% {
+        opacity: 92.5%;
+        transform: translateY(-10px);
+    }
+
+    30%, 60% {
+        opacity: 91%;
+        transform: translateY(-13px);
+    }
+
+    40%, 50% {
+        opacity: 90%;
+        transform: translateY(-15px);
+    }
+}
+
+.smooth-bounce-x {
+    animation: smooth-bounce-x 1s ease-in-out infinite;
+}
+
+@keyframes smooth-bounce-x {
+    0% {
+        opacity: 100%;
+        transform: translateX(0px);
+    }
+
+    10%, 90% {
+        opacity: 95%;
+        transform: translateX(1px);
+    }
+
+    20%, 80% {
+        opacity: 92.5%;
+        transform: translateX(1.5px);
+    }
+
+    30%, 60% {
+        opacity: 91%;
+        transform: translateX(1.75px);
+    }
+
+    40%, 50% {
+        opacity: 90%;
+        transform: translateX(2px);
     }
 }

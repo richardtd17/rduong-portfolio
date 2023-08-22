@@ -195,30 +195,4 @@ function scrollDown(key:String) {
     filter: invert(93%) sepia(7%) saturate(264%) hue-rotate(103deg) brightness(106%) contrast(95%);
 }
 
-@keyframes smooth-bounce {
-    0% {
-        opacity: 100%;
-    }
-
-    10%, 90% {
-        opacity: 95%;
-        transform: translateY(-5px);
-    }
-
-    20%, 80% {
-        opacity: 92.5%;
-        transform: translateY(-10px);
-    }
-
-    30%, 60% {
-        opacity: 91%;
-        transform: translateY(-13px);
-    }
-
-    40%, 50% {
-        opacity: 90%;
-        transform: translateY(-15px);
-    }
-}
-
 </style>
