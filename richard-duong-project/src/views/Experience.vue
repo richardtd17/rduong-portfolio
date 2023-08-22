@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
-const experiences = ref([
-    {
+const experiences = ref({
+    activeherb: {
         title: 'Activeherb Technology Inc',
-        subtitle: 'Full Stack Software Developer',
+        subtitle: 'Software Developer',
         description: [
             'Developed checkout process, account pages, and product pages for website redesign using HTML5, CSS, Vue.js, and vanilla Javascript',
             'Collaborated with design team to transform static design mockups into dynamic and responsive web pages',
@@ -16,34 +16,59 @@ const experiences = ref([
         ],
         img: null
     },
-    {
+    homecoin: {
         title: 'homecoin.com',
-        subtitle: 'Subtitle of project 2',
-        description: ['This is what we did'],
+        subtitle: 'Junior Software Developer',
+        description: [],
         img: null
     },
-    {
+    itsServiceDesk: {
         title: 'ITS Service Desk',
-        subtitle: 'Subtitle of project 3',
+        subtitle: 'IT Service Desk Technician',
         description: ['This is what we did'],
         img: null
     }
-])
+});
+
+const cardCurrentlyShown = ref('activeherb');
+const experienceCards = ref({});
+const cardIsOverflown = computed(() => {
+    let element = experienceCards.value[cardCurrentlyShown.value];
+
+    return (element?.scrollHeight > element?.clientHeight || element?.scrollWidth > element?.clientWidth);
+});
+
+onMounted(() => {
+    changeCard(cardCurrentlyShown.value);
+});
+
+function changeCard(key:String) {
+    cardCurrentlyShown.value = key;
+}
+
+function scrollDown(key:String) {
+    experienceCards.value[key].scrollTop = experienceCards.value[key].scrollHeight;
+}
 </script>
 
 <template>
     <section id="experience-section">
         <div class="experiences-container fade-in">
-            <div v-for="experience in experiences" class="item">
+            <div v-for="(item, key) in experiences" class="item" :ref="(el:HTMLElement) => {experienceCards[key] = el}" @click="changeCard(key)">
                 <div class="experiences-content">
-                    <h2>{{ experience.title }}</h2>
-                    <i>{{ experience.subtitle }}</i>
+                    <div class="title-container">
+                        <h2>{{ item.title }}</h2>
+                        <i>{{ item.subtitle }}</i>
+                    </div>
 
                     <ul class="description">
-                        <li v-for="line in experience.description">
+                        <li v-for="line in item.description">
                             {{ line }}
                         </li>
                     </ul>
+                </div>
+                <div class="scroll-icon-container" v-if="cardIsOverflown" @click="scrollDown(key)">
+                    <div class="scroll-icon"><img src="/src/assets/img/icons/arrow-down-solid.svg"/></div>
                 </div>
             </div>
         </div>
@@ -51,6 +76,7 @@ const experiences = ref([
 </template>
 
 <style scoped>
+
 .experiences-content .description {
     display: flex;
     flex-direction: column;
@@ -79,17 +105,19 @@ const experiences = ref([
 
     position: absolute;
 
-    width: 32%;
-    height: 60vh;
+    width: 25%;
+    height: 65%;
 
-    padding: 2rem;
+    padding-block: 1rem;
 
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+
+    cursor: pointer;
 }
 
-.experiences-container:hover .item {
-    border: 1px solid black;
+.experiences-container .item:hover {
+    border: 1px solid var(--light);
 }
 
 .experiences-container .item:nth-child(1) {
@@ -123,4 +151,74 @@ const experiences = ref([
         transform: translateX(10%) rotate(10deg) translateY(-10%);
     }
 }
+
+.experiences-container .item .experiences-content{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding: 1rem 2rem;
+}
+
+.scroll-icon-container {
+    width: 100%;
+    position: sticky;
+
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.scroll-icon-container .scroll-icon {
+
+    height: 2rem;
+    width: 2rem;
+    background-color: var(--light);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    animation: smooth-bounce 1s ease-in-out infinite;
+}
+
+.scroll-icon-container:hover > .scroll-icon {
+    background-image: linear-gradient(rgb(0 0 0/50%) 0 0);
+}
+
+.scroll-icon-container .scroll-icon img {
+    width: 1rem;
+    filter: invert(93%) sepia(7%) saturate(264%) hue-rotate(103deg) brightness(106%) contrast(95%);
+}
+
+@keyframes smooth-bounce {
+    0% {
+        opacity: 100%;
+    }
+
+    10%, 90% {
+        opacity: 95%;
+        transform: translateY(-5px);
+    }
+
+    20%, 80% {
+        opacity: 92.5%;
+        transform: translateY(-10px);
+    }
+
+    30%, 60% {
+        opacity: 91%;
+        transform: translateY(-13px);
+    }
+
+    40%, 50% {
+        opacity: 90%;
+        transform: translateY(-15px);
+    }
+}
+
 </style>

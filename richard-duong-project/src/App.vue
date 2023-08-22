@@ -51,12 +51,52 @@ function stopMusic() {
 </script>
 
 <template>
+    <div id="side-menu" class="">
+        <div class="social-media-icons-container">
+            <div>
+                <img src="/src/assets/img/icons/linkedin.svg" />
+                <div class="social-content">
+                    <div class="arrow-left"></div>
+                    @richardtduong
+                </div>
+            </div>
+            
+            <div>
+                <img src="/src/assets/img/icons/instagram.svg" />
+                <div class="social-content">
+                    <div class="arrow-left"></div>
+                    @rdtherde
+                </div>
+            </div>
+            <div>
+                <img src="/src/assets/img/icons/spotify.svg" />
+                <div class="social-content">
+                    <div class="arrow-left"></div>
+                    Coming soon!
+                </div>
+            </div>
+            <div>
+                <img src="/src/assets/img/icons/soundcloud.svg" />
+                <div class="social-content">
+                    <div class="arrow-left"></div>
+                    Coming soon!
+                </div>
+            </div>
+            <div>
+                <img src="/src/assets/img/icons/youtube.svg" />
+                <div class="social-content">
+                    <div class="arrow-left"></div>
+                    Coming soon!
+                </div>
+            </div>
+        </div>
+    </div>
     <header>
-        <h1><RouterLink to="/">Richard Duong</RouterLink></h1>
+        <span><RouterLink to="/">Richard Duong</RouterLink></span>
         <nav>
-            <RouterLink to="/projects">Projects</RouterLink>
+            <!-- <RouterLink to="/projects">Projects</RouterLink> -->
             <RouterLink to="/experience">Experience</RouterLink>
-            <RouterLink to="/experience">Music</RouterLink>
+            <!-- <RouterLink to="/experience">Music</RouterLink> -->
         </nav>
     </header>
     <main id="main-content">
@@ -95,17 +135,98 @@ function stopMusic() {
 </template>
 
 <style scoped>
+#side-menu {
+    width: var(--side-menu-width);
+    height: 100%;
 
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background-color: var(--darkest);
+
+    display: flex;
+    align-items: center;
+}
+
+#side-menu .social-media-icons-container {    
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+
+    padding: .5rem;
+}
+
+#side-menu .social-media-icons-container div {
+    position: relative;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+#side-menu .social-media-icons-container div img {
+    width: 75%;
+    cursor: pointer;
+
+    filter: invert(67%) sepia(21%) saturate(308%) hue-rotate(184deg) brightness(87%) contrast(87%);
+
+    transition: all .3s ease-in-out;
+}
+
+#side-menu .social-media-icons-container div img:hover {
+    width: 100%;
+    filter: invert(100%);
+}
+
+#side-menu .social-media-icons-container .social-content {
+    display: none;
+
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    width: max-content;
+    height: 1rem;
+
+    position: absolute;
+    top: 0;
+    left: var(--side-menu-width);
+    z-index: 9999;
+
+    padding: 1rem;
+    background: #FFF;
+}
+
+#side-menu .social-media-icons-container .social-content .arrow-left {
+    position: absolute;
+    left: -5px;
+
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent; 
+  
+    border-right: 7px solid #FFF; 
+}
+
+#side-menu .social-media-icons-container img:hover + .social-content {
+    display: flex !important;
+    align-items: center;
+}
 
 header {
+    margin-left: var(--side-menu-width);
+
     display: flex;
     align-items: baseline;
     gap: 2rem;
     padding: 1rem;
-    background: #fff;
+    background: var(--lightest);
 }
 
-header h1 a {
+header span a {
     color: var(--darker);
     font-size: 1.5rem;
     text-decoration: none;
@@ -135,9 +256,6 @@ header nav a:hover {
 }
 
 @media all and (min-width: 992px) {
-    header {
-        border-bottom: 1px solid var(--darker);
-    }
 
     header nav {
         display: flex;
@@ -147,15 +265,16 @@ header nav a:hover {
     }
 }
 #main-content {
+    margin-left: var(--side-menu-width);
     display: flex;
     gap: 2rem;
-    padding: 3.5rem 7rem;
+    padding: 2.5rem 5rem;
 }
 
 .song-title-container {
     position: absolute;
     top: 5rem;
-    left: 2rem;
+    left: 1rem + var(--side-menu-width);
 
     display: inline-block;
 }
@@ -184,7 +303,7 @@ section#about-me .title-container {
 
 section#about-me .title-container .title {
     color: var(--darkest);
-    font-size: 2.75rem;
+    font-size: 3.5rem;
 }
 .animate-text-background {
     background-image: url('/src/assets/img/hearts-background-1.jpg');
@@ -272,7 +391,7 @@ section#about-me .body {
 }
 section#about-me .body .technology-list {
     padding: 1rem;
-    background: #8E98AF;
+    background: var(--light);
     border-radius: 7px;
     font-weight: 500;
     color: var(--lightest);

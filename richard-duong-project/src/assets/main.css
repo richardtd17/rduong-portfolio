@@ -25,8 +25,10 @@ div#app {
     --darkest: #000009;
     --darker: #3c4848;
     --neutral: #6c7676;
-    --light: #9ba3a4;
+    --light: #8E98AF;;
     --lightest: #ecf8f6;
+
+    --side-menu-width: 50px;
 }
 
 header {
