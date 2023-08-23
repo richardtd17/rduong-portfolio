@@ -72,10 +72,107 @@ button {
     color: var(--light);
 }
 
+.light-round-outlined-btn {
+    background-color: var(--lightest);
+    color: var(--light);
+    font-weight: 500;
+
+    border: 1px solid var(--light);
+    border-radius: 20px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.light-round-outlined-btn:hover {
+    background-color: var(--light);
+    border: 1px solid transparent;
+    color: var(--lightest);
+}
+
 /* Animations */
 
 .fade-in {
     animation: fadeIn 1s ease-in-out;
+}
+
+.fade-in-delay-1 {
+    animation: fadeInDelay1 1.5s ease-in-out;
+}
+
+.fade-in-delay-2 {
+    animation: fadeInDelay2 2s ease-in-out;
+}
+
+.fade-in-delay-3 {
+    animation: fadeInDelay3 2.5s ease-in-out;
+}
+
+.fade-in-delay-4 {
+    animation: fadeInDelay4 3s ease-in-out;
+}
+
+.fade-in-delay-5 {
+    animation: fadeInDelay5 3.5s ease-in-out;
+}
+
+@keyframes fadeInDelay1 {
+    0% {
+        opacity: 0;
+    }
+    33% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDelay2 {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDelay3 {
+    0% {
+        opacity: 0;
+    }
+    60% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDelay4 {
+    0% {
+        opacity: 0;
+    }
+    66% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDelay5 {
+    0% {
+        opacity: 0;
+    }
+    71.5% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeIn {

@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue'
+import { useRoute, RouterLink, RouterView } from 'vue-router'
+import { ref, watch } from 'vue'
+
+const route = useRoute();
+
+watch(() => route.name, () => {
+  animateBannerExit();
+});
 
 const isPlayingMusic = ref(false)
 const clickToPlayNotification = ref(false)
+const bannerExit = ref(false)
+const separatorBar = ref();
 
 let goldenHeart = new Audio(location.href + 'src/assets/sounds/golden-heart-slowed-4.mp3')
 
@@ -21,6 +29,20 @@ function stopMusic() {
     goldenHeart.pause()
     goldenHeart.currentTime = 0
 }
+
+function animateBannerExit() {
+    bannerExit.value = true;
+
+    separatorBar.value.addEventListener("animationend", processAnimationEnd);
+
+    function processAnimationEnd(event:AnimationEvent) {
+        if (event.animationName.includes('slide-out-to-right')) {
+            bannerExit.value = false;
+            separatorBar.value.removeEventListener("animationend", processAnimationEnd);
+        }
+    }
+}
+
 </script>
 
 <template>
@@ -29,11 +51,16 @@ function stopMusic() {
         <nav>
             <!-- <RouterLink to="/projects">Projects</RouterLink> -->
             <RouterLink to="/experience">Experience</RouterLink>
+            <RouterLink to="/contact-me">Contact</RouterLink>
+
             <!-- <RouterLink to="/experience">Music</RouterLink> -->
         </nav>
     </header>
-    <div class="separator-bar"></div>
+    <div ref="separatorBar" class="separator-bar" :class="{'slide-out-to-right':bannerExit, 'slide-in-from-left': !bannerExit}">
+        <span :class="{'hide-element':!bannerExit}">navigating :)...</span>
+    </div>
     <div id="side-menu" class="">
+
         <div class="social-media-icons-container">
             <div>
                 <img src="/src/assets/img/icons/linkedin.svg" />
@@ -147,10 +174,45 @@ header nav a:hover {
 }
 
 .separator-bar {
+    position: relative;
+
     width: 65%;
 
     background: var(--darkest);
     padding: 1.25rem;
+}
+
+.separator-bar span {
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+
+.slide-in-from-left {
+    animation: slide-in-from-left 1s ease-in-out;
+}
+
+@keyframes slide-in-from-left {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.slide-out-to-right {
+    animation: slide-out-to-right 1s ease-in-out;
+}
+
+@keyframes slide-out-to-right {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        opacity: 0%;
+        transform: translateX(100%);
+    }
 }
 
 #side-menu {

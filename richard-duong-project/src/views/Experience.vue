@@ -49,28 +49,60 @@ function changeCard(key:String) {
 function scrollDown(key:String) {
     experienceCards.value[key].scrollTop = experienceCards.value[key].scrollHeight;
 }
+
+const programmingTechnologies = [
+    'Javascript',
+    'HTML5',
+    'CSS',
+    'Vue.js',
+    'jQuery',
+    'Python',
+    'Pandas',
+    'PHP',
+    'Laravel',
+    'Eloquent',
+    'Atlassian',
+    'MySQL',
+    'AWS (S3, EC2, Lambda)'
+]
+
+const musicTechnologies = ['Ableton']
+
+const technologies = ref({
+    Programming: programmingTechnologies,
+    Music: musicTechnologies
+})
 </script>
 
 <template>
     <section id="experience-section">
-        <div class="experiences-container fade-in">
-            <div v-for="(item, key) in experiences" class="item" :ref="(el:HTMLElement) => {experienceCards[key] = el}" @click="changeCard(key)">
-                <div class="experiences-content">
-                    <div class="title-container">
-                        <h2>{{ item.title }}</h2>
-                        <i>{{ item.subtitle }}</i>
-                    </div>
+        <div class="body">
+            <h3>Work Experience</h3>
+            <div class="experiences-container fade-in">
+                <div v-for="(item, key) in experiences" class="item" :ref="(el:HTMLElement) => {experienceCards[key] = el}" @click="changeCard(key)">
+                    <div class="experiences-content">
+                        <div class="title-container">
+                            <h2>{{ item.title }}</h2>
+                            <i>{{ item.subtitle }}</i>
+                        </div>
 
-                    <ul class="description">
-                        <li v-for="line in item.description">
-                            {{ line }}
-                        </li>
-                    </ul>
-                </div>
-                <div class="scroll-icon-container" v-if="cardIsOverflown" @click="scrollDown(key)">
-                    <div class="scroll-icon"><img src="/src/assets/img/icons/arrow-down-solid.svg"/></div>
+                        <ul class="description">
+                            <li v-for="line in item.description">
+                                {{ line }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="scroll-icon-container" v-if="cardIsOverflown" @click="scrollDown(key)">
+                        <div class="scroll-icon"><img src="/src/assets/img/icons/arrow-down-solid.svg"/></div>
+                    </div>
                 </div>
             </div>
+
+            <h3>Technologies</h3>
+            <p class="technologies" v-for="(technologyList, index) in technologies">
+                <h4>{{ index }}</h4>
+                <div class="technology-list fade-in"><span v-for="technology in technologyList">{{ technology }} </span></div>
+            </p>
         </div>
     </section>
 </template>
@@ -193,6 +225,28 @@ function scrollDown(key:String) {
 .scroll-icon-container .scroll-icon img {
     width: 1rem;
     filter: invert(93%) sepia(7%) saturate(264%) hue-rotate(103deg) brightness(106%) contrast(95%);
+}
+
+section#experience-section .body .technology-list {
+    padding: 1rem;
+    background: var(--light);
+    border-radius: 7px;
+    font-weight: 500;
+    color: var(--lightest);
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+section#experience-section .body .technologies {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+section#experience-section .body .technologies h4 {
+    font-weight: normal;
 }
 
 </style>

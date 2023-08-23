@@ -7,33 +7,8 @@ const props = defineProps<{
 }>() 
 
 const aboutMeContent = ref([
-    "Hello! I'm Richard, a software developer specializing in crafting dynamic, responsive user interfaces and building robust backend infrastructures.",
     "When I'm not coding, you'll either find me in my home music studio writing and producing original music, playing video games, or at a local bar watching the NBA :)",
-    "It was nice of you to stop by! If you'd like to learn a little more about me or are interested in working with me, shoot me a message!"
 ])
-
-const programmingTechnologies = [
-    'Javascript',
-    'HTML5',
-    'CSS',
-    'Vue.js',
-    'jQuery',
-    'Python',
-    'Pandas',
-    'PHP',
-    'Laravel',
-    'Eloquent',
-    'Atlassian',
-    'MySQL',
-    'AWS (S3, EC2, Lambda)'
-]
-
-const musicTechnologies = ['Ableton']
-
-const technologies = ref({
-    Programming: programmingTechnologies,
-    Music: musicTechnologies
-})
 
 const emit = defineEmits(['play-music', 'stop-music'])
 
@@ -55,14 +30,10 @@ const emit = defineEmits(['play-music', 'stop-music'])
                 <span @mouseover="emit('play-music')" @mouseleave="emit('stop-music')">Singer/Songwriter</span>
             </h3>
             <div class="body">
+                <p><span class="emphasis">Hi I'm Richard!</span> I'm a software developer specializing in crafting dynamic, responsive user interfaces and building robust backend infrastructures.</p>
                 <p v-for="content in aboutMeContent">{{ content }}</p>
+                <p class="contact"><span class="emphasis">It was nice of you to stop by!</span> If you'd like to learn a little more about me or are interested in working with me, shoot me a message!</p>
                 <div class="connect-button-container"><RouterLink to="/contact-me"><button class="light-round-btn"><span>Let's Connect<i class="fa-solid fa-caret-right smooth-bounce-x"></i></span></button></RouterLink></div>
-
-                <h3>Technologies</h3>
-                <p class="technologies" v-for="(technologyList, index) in technologies">
-                    <h4>{{ index }}</h4>
-                    <div class="technology-list fade-in"><span v-for="technology in technologyList">{{ technology }} </span></div>
-                </p>
             </div>
         </div>
     </section>
@@ -170,6 +141,11 @@ section#about-me .body {
     gap: 1rem;
 }
 
+.emphasis{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
 section#about-me .body .connect-button-container {
     display: flex;
     justify-content: flex-end;
@@ -184,28 +160,6 @@ section#about-me .body .connect-button-container span {
     align-items: center;
 
     gap: 5px;
-}
-
-section#about-me .body .technology-list {
-    padding: 1rem;
-    background: var(--light);
-    border-radius: 7px;
-    font-weight: 500;
-    color: var(--lightest);
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-section#about-me .body .technologies {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-section#about-me .body .technologies h4 {
-    font-weight: normal;
 }
 
 /* Animations  */
