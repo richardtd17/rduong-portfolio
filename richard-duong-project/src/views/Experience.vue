@@ -76,6 +76,9 @@ const technologies = ref({
 
 <template>
     <section id="experience-section">
+        <div class="header">
+            <h2 class="title">Experience</h2>
+        </div>
         <div class="body">
             <h3>Work Experience</h3>
             <div class="experiences-container fade-in">
@@ -109,36 +112,41 @@ const technologies = ref({
 
 <style scoped>
 
-.experiences-content .description {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 #experience-section {
     flex-basis: 55%;
 
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 }
 
-.title-container {
-    width: 100%;
+#experience-section .header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
-.experiences-container {
-    flex-grow: 1;
+
+#experience-section .body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#experience-section .body .experiences-container {
+
+    height: 65vh;
 
     display: flex;
-    align-items: center;
     justify-content: center;
 }
-.experiences-container .item {
+
+#experience-section .body .experiences-container .item {
     overflow: auto;
 
     position: absolute;
 
     width: 25%;
-    height: 65%;
+    height: 75%;
 
     padding-block: 1rem;
 
@@ -149,7 +157,7 @@ const technologies = ref({
 }
 
 .experiences-container .item:hover {
-    border: 1px solid var(--light);
+    border: 1px solid var(--ten);
 }
 
 .experiences-container .item:nth-child(1) {
@@ -192,6 +200,17 @@ const technologies = ref({
     padding: 1rem 2rem;
 }
 
+.experiences-container .item .experiences-content .title-container {
+    width: 100%;
+}
+
+.experiences-container .item .experiences-content .description {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
 .scroll-icon-container {
     width: 100%;
     position: sticky;
@@ -207,7 +226,7 @@ const technologies = ref({
 
     height: 2rem;
     width: 2rem;
-    background-color: var(--light);
+    background-color: var(--ten);
 
     display: flex;
     align-items: center;
@@ -229,10 +248,10 @@ const technologies = ref({
 
 section#experience-section .body .technology-list {
     padding: 1rem;
-    background: var(--light);
+    background: var(--ten);
     border-radius: 7px;
     font-weight: 500;
-    color: var(--lightest);
+    color: var(--sixty);
 
     display: flex;
     flex-wrap: wrap;

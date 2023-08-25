@@ -10,14 +10,22 @@ const props = defineProps<{
 
 <template>
     <section id="contact" class="fade-in">
-        <div class="title-container">
-            <h2 class="title">Want to connect? Fill out the form below!</h2>
+        <div class="header">
+            <h2 class="title">Let's Connect!</h2>
+            <div class="form-content">
+                <p>Whether you're interested in discussing a project, exploring collaboration opportunities, or just want to say hello, I'd love to hear from you. Feel free to reach out, and let's start a conversation about technology, creativity, and everything in between.</p>
+            </div>
         </div>
         <div class="body">
             <form class="email-form">
                 <div class="input-group">
+                    <label for="email">Your Email Address</label>
+                    <input name="email" type="email" placeholder="xyz@xyz.com" />
+                </div>
+
+                <div class="input-group">
                     <label for="subject">Subject</label>
-                    <input name="subject" type="text" placeholder="i.e. &quot;hey cool website&quot;" />
+                    <input name="subject" type="text" placeholder="i.e. &quot;cool website&quot;" />
                 </div>
 
                 <div class="input-group">
@@ -25,7 +33,7 @@ const props = defineProps<{
                     <textarea name="message" placeholder="Whatever you'd like!"></textarea>
                 </div>
                 <div class="footer">
-                    <button type="button" class="light-round-outlined-btn">Submit</button>
+                    <button type="button" class="light-round-btn">Submit</button>
                 </div>
             </form>
         </div>
@@ -57,32 +65,43 @@ const props = defineProps<{
 
 section#contact {
     flex-basis: 45%;
-    padding-top: 2rem;
     height: max-content;
 
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+section#contact .header {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-section#contact .title-container .title {
-    color: var(--darkest);
+section#contact .header .title {
+    color: var(--thirty);
     font-size: 1.5rem;
 }
 
 input, textarea {
     padding: 1rem;
-    border: 2px solid var(--light);
+    border: 2px solid var(--ten);
     border-radius: 10px;
-
 }
 
 textarea {
-    height: 100px;
+    height: 200px;
 
     resize: vertical; 
+    min-height: 100px;
     max-height: 250px;
     font-family: 'Roboto', sans-serif;
+}
+
+section#contact .body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 section#contact form.email-form {

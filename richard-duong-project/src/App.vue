@@ -57,10 +57,8 @@ function animateBannerExit() {
         </nav>
     </header>
     <div ref="separatorBar" class="separator-bar" :class="{'slide-out-to-right':bannerExit, 'slide-in-from-left': !bannerExit}">
-        <span :class="{'hide-element':!bannerExit}">navigating :)...</span>
     </div>
     <div id="side-menu" class="">
-
         <div class="social-media-icons-container">
             <div>
                 <img src="/src/assets/img/icons/linkedin.svg" />
@@ -101,7 +99,6 @@ function animateBannerExit() {
         </div>
     </div>
     <main id="main-content">
-        <img class="fade-pulse" src="/src/assets/img/logos/3.svg" />
         <div v-if="isPlayingMusic" class="song-title-container">
             <div class="typed">Now playing... golden heart</div>
         </div>
@@ -123,7 +120,7 @@ header {
     align-items: center;
     gap: 2rem;
     padding: 1rem;
-    background: var(--lightest);
+    background: var(--sixty);
 }
 
 header .logo {
@@ -160,7 +157,7 @@ header nav a:hover {
         calc(var(--x-offset) - var(--stroke)) calc(var(--y-offset) + var(--stroke)) 0px
             var(--stroke-color);
 
-    color: var(--darkest);
+    color: var(--thirty);
 }
 
 @media all and (min-width: 992px) {
@@ -178,7 +175,7 @@ header nav a:hover {
 
     width: 65%;
 
-    background: var(--darkest);
+    background: var(--thirty);
     padding: 1.25rem;
 }
 
@@ -223,7 +220,7 @@ header nav a:hover {
     top: 0;
     left: 0;
 
-    background-color: var(--darkest);
+    background-color: var(--thirty);
 
     display: flex;
     align-items: center;
@@ -305,18 +302,24 @@ header nav a:hover {
 
 section#hero {
     width: 40%;
+    height: 100vh;
+
+    position:relative;
 
     display: flex;
     justify-content: center;
 }
 
 section#hero img {
+
+    position:absolute;
+    
     width: 80%;
     height: auto;
     object-fit: cover; /*magic*/
 
 
-    box-shadow: -1rem 1rem var(--darkest);
+    box-shadow: -1rem 1rem var(--thirty);
 }
 
 .song-title-container {

@@ -16,7 +16,7 @@ const emit = defineEmits(['play-music', 'stop-music'])
 
 <template>
     <section id="about-me">
-        <div class="title-container fade-in">
+        <div class="header fade-in">
             <h2
                 class="title"
                 :class="{
@@ -29,31 +29,34 @@ const emit = defineEmits(['play-music', 'stop-music'])
                 and
                 <span @mouseover="emit('play-music')" @mouseleave="emit('stop-music')">Singer/Songwriter</span>
             </h3>
-            <div class="body">
+        </div>
+        <div class="body">
                 <p><span class="emphasis">Hi I'm Richard!</span> I'm a software developer specializing in crafting dynamic, responsive user interfaces and building robust backend infrastructures.</p>
                 <p v-for="content in aboutMeContent">{{ content }}</p>
                 <p class="contact"><span class="emphasis">It was nice of you to stop by!</span> If you'd like to learn a little more about me or are interested in working with me, shoot me a message!</p>
                 <div class="connect-button-container"><RouterLink to="/contact-me"><button class="light-round-btn"><span>Let's Connect<i class="fa-solid fa-caret-right smooth-bounce-x"></i></span></button></RouterLink></div>
             </div>
-        </div>
     </section>
 </template>
 
 <style scoped>
 section#about-me {
     flex-basis: 45%;
-    padding-top: 2rem;
     height: max-content;
-}
 
-section#about-me .title-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
 }
 
-section#about-me .title-container .title {
-    color: var(--darkest);
+section#about-me .header {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+section#about-me .header .title {
+    color: var(--thirty);
     font-size: 3.5rem;
 }
 .animate-text-background {
@@ -71,7 +74,7 @@ section#about-me .title-container .title {
     animation: animatedBackground 5s linear infinite forwards;
 }
 
-section#about-me .title-container .title::after {
+section#about-me .header .title::after {
     content: 'Richard Duong';
 }
 
@@ -86,6 +89,8 @@ section#about-me .subtitle {
     gap: 0.5rem;
 
     color: var(--neutral);
+
+    font-size: 1.5rem;
 }
 
 section#about-me .subtitle span {
@@ -107,7 +112,7 @@ section#about-me .subtitle span:hover {
         calc(var(--x-offset) - var(--stroke)) calc(var(--y-offset) + var(--stroke)) 0px
             var(--stroke-color);
 
-    color: var(--darkest);
+    color: var(--thirty);
 }
 
 section#about-me .subtitle span:nth-child(1) {
@@ -133,16 +138,15 @@ section#about-me .subtitle span:nth-child(3) {
 }
 
 section#about-me .body {
-    color: var(--neutral);
-    line-height: 1.5;
-
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    font-size: 1.1rem;
 }
 
 .emphasis{
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
