@@ -33,7 +33,7 @@ const props = defineProps<{
                     <textarea name="message" placeholder="Whatever you'd like!" class="fade-in-delay-4"></textarea>
                 </div>
                 <div class="footer">
-                    <button type="button" class="light-round-btn fade-in-delay-5">Submit</button>
+                    <button type="button" class="light-round-btn fade-in-delay-5">Submit<i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </form>
         </div>
@@ -135,6 +135,9 @@ section#contact form.email-form .footer{
 
 section#contact form.email-form .footer button{
     padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 }
 
 section#contact .social-media-container {
