@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 
-const experiences = ref({
+const workExperiences = ref({
     activeherb: {
         title: 'Activeherb Technology Inc',
         subtitle: 'Software Developer',
@@ -14,19 +14,31 @@ const experiences = ref({
             'Led major security updates on websites to ensure compliance with up-to-date programming practices and maintain strict adherence to PCI (Payment Card Industry) standards',
             'Worked closely with the office manager to optimize shipping and packaging processing algorithm, improving the accuracy of automated shipping label generation by 35% on 500+ labels printed weekly'
         ],
-        img: null
+        img: '/src/assets/img/experience/activeherb-logo.jpeg',
+        date: "Mar 2023 - Present",
+        orderClass: 'card-1'
     },
     homecoin: {
         title: 'homecoin.com',
         subtitle: 'Junior Software Developer',
-        description: [],
-        img: null
+        description: [
+            'Designed and built a scalable marketing outreach system leading to 6% faster increase in user acquisition and sales in first month of launch (Vue.js, PHP/Laravel)',
+            'Built and maintained tool to save 100s of admin hours visualizing and manipulating spatial data (jQuery, PHP/Laravel)',
+            'Led checkout redesign implementing new features and reducing time in checkout by 5% (Vue.js, PHP/Laravel)',
+            'Performed various website and algorithmic hotfixes to tailor customer experience',
+            'Collaborated in weekly code review and testing for all production software'
+        ],
+        img: '/src/assets/img/experience/homecoin-logo.jpeg',
+        date: "Aug 2021 - Jan 2023",
+        orderClass: 'card-2'
     },
     itsServiceDesk: {
-        title: 'ITS Service Desk',
+        title: 'ITS Service Desk @ UCSD',
         subtitle: 'IT Service Desk Technician',
-        description: ['This is what we did'],
-        img: null
+        description: ['Provided phone, email, and text support for network, email, phone, software, security issues, accounts, business web applications, and more using the ServiceNow platform, closing ~50-60 cases per week.'],
+        img: '/src/assets/img/experience/triton-logo.png',
+        date: "Sept 2020 - Aug 2021",
+        orderClass: 'card-3'
     }
 });
 
@@ -37,13 +49,34 @@ const cardIsOverflown = computed(() => {
 
     return (element?.scrollHeight > element?.clientHeight || element?.scrollWidth > element?.clientWidth);
 });
+const showCardOverflowAnimation = ref(true);
 
 onMounted(() => {
     changeCard(cardCurrentlyShown.value);
 });
 
 function changeCard(key:String) {
+
+    let workExperiencesInstance = workExperiences.value;
+    let cardClass = workExperiencesInstance[key].orderClass;
+
+    workExperiencesInstance[key].orderClass = 'card-1';
+    workExperiencesInstance[cardCurrentlyShown.value].orderClass = cardClass;
+
     cardCurrentlyShown.value = key;
+}
+
+function scrollCard() {
+    if (cardIsOverflown.value) {
+        let element = experienceCards.value[cardCurrentlyShown.value];
+
+        if (element.scrollHeight - element.scrollTop - element.clientHeight < 1) {
+            showCardOverflowAnimation.value = false;
+        }
+        else {
+            showCardOverflowAnimation.value = true;
+        }
+    }
 }
 
 function scrollDown(key:String) {
@@ -76,17 +109,21 @@ const technologies = ref({
 
 <template>
     <section id="experience-section">
-        <div class="header">
+        <div class="header fade-in">
             <h2 class="title">Experience</h2>
         </div>
         <div class="body">
-            <h3>Work Experience</h3>
+            <h3 class="fade-in-delay-1">Work Experience</h3>
             <div class="experiences-container fade-in">
-                <div v-for="(item, key) in experiences" class="item" :ref="(el:HTMLElement) => {experienceCards[key] = el}" @click="changeCard(key)">
+                <div v-for="(item, key) in workExperiences" class="item" :class="item.orderClass" :ref="(el:HTMLElement) => {experienceCards[key] = el}" @click="changeCard(key)" @scroll="scrollCard">
                     <div class="experiences-content">
-                        <div class="title-container">
-                            <h2>{{ item.title }}</h2>
-                            <i>{{ item.subtitle }}</i>
+                        <div class="header">
+                            <img v-if="item.img" :src="item.img"/>
+                            <div class="title-container">
+                                <h2>{{ item.title }}</h2>
+                                <i>{{ item.subtitle }}</i>
+                                <span>{{ item.date }}</span>
+                            </div>
                         </div>
 
                         <ul class="description">
@@ -95,7 +132,7 @@ const technologies = ref({
                             </li>
                         </ul>
                     </div>
-                    <div class="scroll-icon-container" v-if="cardIsOverflown" @click="scrollDown(key)">
+                    <div class="scroll-icon-container" v-if="cardIsOverflown && showCardOverflowAnimation" @click="scrollDown(key)">
                         <div class="scroll-icon"><img src="/src/assets/img/icons/arrow-down-solid.svg"/></div>
                     </div>
                 </div>
@@ -120,7 +157,7 @@ const technologies = ref({
     gap: 2rem;
 }
 
-#experience-section .header {
+#experience-section > .header {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -132,9 +169,20 @@ const technologies = ref({
     gap: 2rem;
 }
 
+#experience-section .body .experiences-container .header {
+    display: flex;
+    gap: 1rem;
+
+    align-items: center;
+}
+
+#experience-section .body .experiences-container .header img {
+    width: 20%;
+}
+
 #experience-section .body .experiences-container {
 
-    height: 65vh;
+    height: clamp(500px, 60vh, 750px);
     min-height: 500px;
 
     display: flex;
@@ -143,18 +191,20 @@ const technologies = ref({
 }
 
 #experience-section .body .experiences-container .item {
-    overflow: auto;
 
     position: absolute;
 
-    width: 25%;
-    height: 50%;
+    width: 30%;
+    height: 55%;
 
     padding-block: 1rem;
 
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-
+    background-color: var(--sixty);
+    color: var(--thirty);
+    /* box-shadow: var(--ten) 0px 25px 50px -12px; */
+    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 0 2px 2px rgba(0,0,0,0.11), 0 4px 4px rgba(0,0,0,0.11), 0 6px 8px rgba(0,0,0,0.11), 0 8px 16px rgba(0,0,0,0.11);
+        
+    border-radius: 1rem;
     cursor: pointer;
 }
 
@@ -162,35 +212,60 @@ const technologies = ref({
     border: 1px solid var(--ten);
 }
 
-.experiences-container .item:nth-child(1) {
+.card-1 {
     z-index: 9999;
-}
+    overflow: auto;
 
-.experiences-container .item:nth-child(2) {
+    animation: front-card 1s ease-in-out forwards;
+}
+.card-2 {
     z-index: 9998;
+    overflow: hidden;
+
     animation: spread1 1s forwards;
 }
 
-.experiences-container .item:nth-child(3) {
+.card-3 {
     z-index: 9997;
+    overflow: hidden;
+
     animation: spread2 1s forwards;
+}
+
+@keyframes front-card {
+    0% {
+        opacity: 0%;
+        transform: 0;
+    }
+    40% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100%;
+    }
 }
 
 @keyframes spread1 {
     0% {
         transform: 0;
+        opacity: 100%;
     }
     100% {
         transform: translateX(5%) rotate(5deg) translateY(-5%);
+        opacity: 95%;
     }
 }
 
 @keyframes spread2 {
     0% {
         transform: 0;
+        opacity: 100%;
+
     }
     100% {
         transform: translateX(10%) rotate(10deg) translateY(-10%);
+        opacity: 90%;
+
     }
 }
 
@@ -204,6 +279,9 @@ const technologies = ref({
 
 .experiences-container .item .experiences-content .title-container {
     width: 100%;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .experiences-container .item .experiences-content .description {
@@ -215,9 +293,10 @@ const technologies = ref({
 
 .scroll-icon-container {
     width: 100%;
+    height: 0;
     position: sticky;
 
-    bottom: 0;
+    bottom: 1rem;
 
     display: flex;
     justify-content: center;

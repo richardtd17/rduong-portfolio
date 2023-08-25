@@ -43,6 +43,10 @@ function animateBannerExit() {
     }
 }
 
+function openLink(link:string) {
+    window.open(link, '_blank');
+}
+
 </script>
 
 <template>
@@ -61,7 +65,7 @@ function animateBannerExit() {
     <div id="side-menu" class="">
         <div class="social-media-icons-container">
             <div>
-                <img src="/src/assets/img/icons/linkedin.svg" />
+                <img src="/src/assets/img/icons/linkedin.svg" @click="openLink('https://www.linkedin.com/in/richardtduong/')"/>
                 <div class="social-content">
                     <div class="arrow-left"></div>
                     @richardtduong
@@ -69,7 +73,7 @@ function animateBannerExit() {
             </div>
             
             <div>
-                <img src="/src/assets/img/icons/instagram.svg" />
+                <img src="/src/assets/img/icons/instagram.svg" @click="openLink('https://www.instagram.com/rdtherde/?hl=en')"/>
                 <div class="social-content">
                     <div class="arrow-left"></div>
                     @rdtherde
@@ -277,6 +281,8 @@ header nav a:hover {
 }
 
 #side-menu .social-media-icons-container .social-content .arrow-left {
+    z-index: 9999;
+
     position: absolute;
     left: -5px;
 
@@ -302,9 +308,6 @@ header nav a:hover {
 
 section#hero {
     width: 40%;
-    height: 100vh;
-
-    position:relative;
 
     display: flex;
     justify-content: center;
@@ -312,11 +315,11 @@ section#hero {
 
 section#hero img {
 
-    position:absolute;
-    
+    max-height: 750px;
+
     width: 80%;
     height: auto;
-    object-fit: cover; /*magic*/
+    object-fit: cover; 
 
 
     box-shadow: -1rem 1rem var(--thirty);

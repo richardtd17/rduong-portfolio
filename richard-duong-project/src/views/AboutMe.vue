@@ -16,25 +16,25 @@ const emit = defineEmits(['play-music', 'stop-music'])
 
 <template>
     <section id="about-me">
-        <div class="header fade-in">
+        <div class="header">
             <h2
-                class="title"
+                class="title fade-in"
                 :class="{
                     'animate-text-background': isPlayingMusic,
                     'animate-song-name-gh': isPlayingMusic
                 }"
             ></h2>
-            <h3 class="subtitle">
+            <h3 class="subtitle fade-in-delay-1">
                 <span>Software Developer</span>
                 and
                 <span @mouseover="emit('play-music')" @mouseleave="emit('stop-music')">Singer/Songwriter</span>
             </h3>
         </div>
         <div class="body">
-                <p><span class="emphasis">Hi I'm Richard!</span> I'm a software developer specializing in crafting dynamic, responsive user interfaces and building robust backend infrastructures.</p>
-                <p v-for="content in aboutMeContent">{{ content }}</p>
-                <p class="contact"><span class="emphasis">It was nice of you to stop by!</span> If you'd like to learn a little more about me or are interested in working with me, shoot me a message!</p>
-                <div class="connect-button-container"><RouterLink to="/contact-me"><button class="light-round-btn"><span>Let's Connect<i class="fa-solid fa-caret-right smooth-bounce-x"></i></span></button></RouterLink></div>
+                <p><span class="emphasis fade-in-delay-2">Hi I'm Richard!</span> <span class="fade-in-delay-4">I'm a software developer specializing in crafting dynamic, responsive user interfaces and building robust backend infrastructures.</span></p>
+                <p v-for="content in aboutMeContent" class="fade-in-delay-4">{{ content }}</p>
+                <p class="contact fade-in-delay-4"><span class="emphasis">It was nice of you to stop by!</span> If you'd like to learn a little more about me or are interested in working with me, shoot me a message!</p>
+                <div class="connect-button-container fade-in-delay-5"><RouterLink to="/contact-me"><button class="light-round-btn"><span>Let's Connect<i class="fa-solid fa-caret-right smooth-bounce-x"></i></span></button></RouterLink></div>
             </div>
     </section>
 </template>
