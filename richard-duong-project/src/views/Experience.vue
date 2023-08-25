@@ -135,8 +135,10 @@ const technologies = ref({
 #experience-section .body .experiences-container {
 
     height: 65vh;
+    min-height: 500px;
 
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -146,7 +148,7 @@ const technologies = ref({
     position: absolute;
 
     width: 25%;
-    height: 75%;
+    height: 50%;
 
     padding-block: 1rem;
 
