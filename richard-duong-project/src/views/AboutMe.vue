@@ -26,15 +26,26 @@ const emit = defineEmits(['play-music', 'stop-music'])
             ></h2>
             <h3 class="subtitle fade-in-delay-1">
                 <span>Software Developer</span>
-                and
+                <span>and</span>
                 <span @mouseover="emit('play-music')" @mouseleave="emit('stop-music')">Singer/Songwriter</span>
             </h3>
         </div>
+        <div class="mobile-hero mobile-only">
+            <img src="/src/assets/img/richard/film-portrait.jpeg"/>
+        </div>
         <div class="body">
-                <p><span class="emphasis fade-in-delay-2">Hi I'm Richard!</span> <span class="fade-in-delay-4">I'm a software developer specializing in crafting dynamic, responsive user interfaces and building robust backend infrastructures.</span></p>
+                <p>
+                    <span class="emphasis fade-in-delay-2">Hi I'm Richard!</span> <span class="fade-in-delay-4">I'm a software developer specializing in crafting dynamic, responsive user interfaces and building robust backend infrastructures.</span>
+                </p>
                 <p v-for="content in aboutMeContent" class="fade-in-delay-4">{{ content }}</p>
                 <p class="contact fade-in-delay-4"><span class="emphasis">It was nice of you to stop by!</span> If you'd like to learn a little more about me or are interested in working with me, shoot me a message!</p>
-                <div class="connect-button-container fade-in-delay-5"><RouterLink to="/contact-me"><button class="light-round-btn"><span>Let's Connect<i class="fa-solid fa-caret-right smooth-bounce-x"></i></span></button></RouterLink></div>
+                <div class="connect-button-container fade-in-delay-5">
+                    <RouterLink to="/contact-me">
+                        <button class="light-round-btn">
+                            <span>Let's Connect<i class="fa-solid fa-caret-right smooth-bounce-x"></i></span>
+                        </button>
+                    </RouterLink>
+                </div>
             </div>
     </section>
 </template>
@@ -86,11 +97,12 @@ section#about-me .header .title::after {
 
 section#about-me .subtitle {
     display: inline-flex;
-    gap: 0.5rem;
+    column-gap: 0.5rem;
 
     color: var(--neutral);
 
     font-size: 1.5rem;
+    flex-wrap: wrap;
 }
 
 section#about-me .subtitle span {
@@ -164,6 +176,44 @@ section#about-me .body .connect-button-container span {
     align-items: center;
 
     gap: 5px;
+}
+
+@media screen and (max-width: 991px) {
+    section#about-me .header .title {
+        font-size: 2rem;
+    }
+
+    section#about-me {
+        flex-basis: 0;
+        height: max-content;
+
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    section#about-me .mobile-hero {
+        display: flex !important;
+        justify-content: center;
+    }
+
+    section#about-me .mobile-hero img {
+        width: 60%;
+        height: auto;
+        object-fit: cover; 
+
+        box-shadow: -1rem 1rem var(--thirty);
+    }
+
+    section#about-me .body {
+        margin-top: 1rem;
+    }
+}
+
+@media all and (max-width: 768px) {
+    section#about-me .mobile-hero img {
+        width: 75%;
+    }
 }
 
 /* Animations  */

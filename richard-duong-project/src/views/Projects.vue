@@ -32,7 +32,7 @@ const projects = ref([
             <h1>Projects</h1>
         </div>
         <div class="projects-container">
-            <div v-for="project in projects" class="grid-item">
+            <div v-for="project in projects" class="item">
                 <div class="project-content">
                     <h2>{{ project.title }}</h2>
                     <i>{{ project.subtitle }}</i>
@@ -50,7 +50,12 @@ const projects = ref([
 
 <style scoped>
 #projects-section {
+    flex-basis: 45%;
+    
     display: flex;
+
+    flex-direction: column;
+    gap: 2rem;
 
     height: 100%;
 }
@@ -61,16 +66,15 @@ const projects = ref([
 }
 
 .projects-container {
-    margin-inline: 2rem;
-
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    
+    flex-direction: column;
 
-    column-gap: 4rem;
+    gap: 1rem;
 }
 
-.projects-container .grid-item {
+.projects-container .item {
     display: flex;
     flex-direction: column;
 
@@ -78,41 +82,23 @@ const projects = ref([
     gap: 1rem;
 }
 
-.projects-container .grid-item .project-content {
-    height: max-content;
-
+.projects-container .item .project-content {
     background: #fff;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
     padding: 1rem 2rem;
 }
 
-.projects-container .grid-item .project-content:hover h2,
-.projects-container .grid-item .project-content:hover li {
-    --x-offset: -0.0625em;
-    --y-offset: 0.0625em;
-    --stroke: 0.025em;
-    --background-color: white;
-    --stroke-color: #687578;
-
-    text-shadow:
-        var(--x-offset) var(--y-offset) 0px var(--background-color),
-        calc(var(--x-offset) - var(--stroke)) calc(var(--y-offset) + var(--stroke)) 0px
-            var(--stroke-color);
-
-    color: var(--darkest);
+.projects-container .item:nth-child(1) .project-content {
+    animation: fadeInFromBottom 1.5s ease-in-out;
 }
 
-.projects-container .grid-item:nth-child(1) .project-content {
-    animation: fadeInFromBottom 1.75s ease-in-out;
+.projects-container .item:nth-child(2) .project-content {
+    animation: fadeInFromBottom 2.25s ease-in-out;
 }
 
-.projects-container .grid-item:nth-child(2) .project-content {
-    animation: fadeInFromBottom 2.45s ease-in-out;
-}
-
-.projects-container .grid-item:nth-child(3) .project-content {
-    animation: fadeInFromBottom 3.15s ease-in-out;
+.projects-container .item:nth-child(3) .project-content {
+    animation: fadeInFromBottom 3s ease-in-out;
 }
 
 @keyframes fadeInFromBottom {

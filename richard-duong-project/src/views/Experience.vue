@@ -6,25 +6,22 @@ const workExperiences = ref({
         title: 'Activeherb Technology Inc',
         subtitle: 'Software Developer',
         description: [
-            'Developed checkout process, account pages, and product pages for website redesign using HTML5, CSS, Vue.js, and vanilla Javascript',
-            'Collaborated with design team to transform static design mockups into dynamic and responsive web pages',
+            'Developed and styled multiple user interfaces in website redesign using HTML5, CSS, Vue.js, and vanilla Javascript',
             'Optimized legacy checkout process to reduce load speeds by 22% on average across all checkout pages',
-            'Consolidated and refactored checkout process to streamline sales and minimize tech debt',
             'Managed web servers and performed regular IT duties to support web server infrastructure',
-            'Led major security updates on websites to ensure compliance with up-to-date programming practices and maintain strict adherence to PCI (Payment Card Industry) standards',
+            'Led major security updates on websites to ensure compliance with up-to-date programming practices',
             'Worked closely with the office manager to optimize shipping and packaging processing algorithm, improving the accuracy of automated shipping label generation by 35% on 500+ labels printed weekly'
         ],
         img: '/src/assets/img/experience/activeherb-logo.jpeg',
-        date: "Mar 2023 - Present",
+        date: "Mar 2023 - Oct 2023",
         orderClass: 'card-1'
     },
     homecoin: {
         title: 'homecoin.com',
         subtitle: 'Junior Software Developer',
         description: [
-            'Designed and built a scalable marketing outreach system leading to 6% faster increase in user acquisition and sales in first month of launch (Vue.js, PHP/Laravel)',
+            'Designed, built, and shipped responsive customer-facing and administrative web applications in Laravel and Javascript',
             'Built and maintained tool to save 100s of admin hours visualizing and manipulating spatial data (jQuery, PHP/Laravel)',
-            'Led checkout redesign implementing new features and reducing time in checkout by 5% (Vue.js, PHP/Laravel)',
             'Performed various website and algorithmic hotfixes to tailor customer experience',
             'Collaborated in weekly code review and testing for all production software'
         ],
@@ -110,10 +107,9 @@ const technologies = ref({
 <template>
     <section id="experience-section">
         <div class="header fade-in">
-            <h2 class="title">Experience</h2>
+            <h2 class="title">Work Experience</h2>
         </div>
         <div class="body">
-            <h3 class="fade-in-delay-1">Work Experience</h3>
             <div class="experiences-container fade-in">
                 <div v-for="(item, key) in workExperiences" class="item" :class="item.orderClass" :ref="(el:HTMLElement) => {experienceCards[key] = el}" @click="changeCard(key)" @scroll="scrollCard">
                     <div class="experiences-content">
@@ -150,7 +146,7 @@ const technologies = ref({
 <style scoped>
 
 #experience-section {
-    flex-basis: 55%;
+    flex-basis: 60%;
 
     display: flex;
     flex-direction: column;
@@ -195,7 +191,7 @@ const technologies = ref({
     position: absolute;
 
     width: 30%;
-    height: 55%;
+    height: 500px;
 
     padding-block: 1rem;
 
@@ -208,25 +204,29 @@ const technologies = ref({
     cursor: pointer;
 }
 
+#experience-section .body .experiences-container .item::-webkit-scrollbar {
+    display: none;
+}
+
 .experiences-container .item:hover {
     border: 1px solid var(--ten);
 }
 
 .card-1 {
-    z-index: 9999;
+    z-index: 3;
     overflow: auto;
 
     animation: front-card 1s ease-in-out forwards;
 }
 .card-2 {
-    z-index: 9998;
+    z-index: 2;
     overflow: hidden;
 
     animation: spread1 1s forwards;
 }
 
 .card-3 {
-    z-index: 9997;
+    z-index: 1;
     overflow: hidden;
 
     animation: spread2 1s forwards;
@@ -349,4 +349,34 @@ section#experience-section .body .technologies h4 {
     font-weight: normal;
 }
 
+@media screen and (max-width: 991px) {
+    #experience-section .body .experiences-container .item {
+        width: 50%;
+
+        padding-block: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #experience-section .body {
+        margin-top: 50px;
+    }
+    #experience-section .body .experiences-container .item {
+        width: 65%;
+    }
+}
+
+@media screen and (max-width: 540px) {
+
+    #experience-section .body .experiences-container .item {
+        width: 70%;
+    }
+    .experiences-container .item .experiences-content{
+        padding: 1rem 1rem;
+    }
+
+    .experiences-container .item .experiences-content .title-container {
+        font-size: 90%;
+    }
+}
 </style>

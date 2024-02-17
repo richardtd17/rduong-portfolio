@@ -99,7 +99,35 @@ button {
     color: var(--sixty);
 }
 
+@media screen and (min-width: 992px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    :root {
+        --side-menu-width: 2rem;
+    }
+
+    .mobile-hide {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+}
+
 /* Animations */
+
+.fade-out-double-time {
+    animation: fadeOut 0.5s ease-in-out;
+}
+
+.fade-in-double-time {
+    animation: fadeIn 0.5s ease-in-out;
+}
 
 .fade-in {
     animation: fadeIn 1s ease-in-out;
@@ -191,6 +219,17 @@ button {
     }
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
     }
 }
 

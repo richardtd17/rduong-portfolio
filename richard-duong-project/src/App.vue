@@ -12,12 +12,14 @@ const isPlayingMusic = ref(false)
 const clickToPlayNotification = ref(false)
 const bannerExit = ref(false)
 const separatorBar = ref();
+const showMobileNav = ref(false);
 
 let goldenHeart = new Audio(location.href + 'src/assets/sounds/golden-heart-slowed-4.mp3')
+let dontKnowWhy = new Audio(location.href + 'src/assets/sounds/dont-know-why.mp3') 
 
 function playMusic() {
     try {
-        goldenHeart.play()
+        dontKnowWhy.play()
         isPlayingMusic.value = true
     } catch {
         clickToPlayNotification.value = true
@@ -26,8 +28,8 @@ function playMusic() {
 
 function stopMusic() {
     isPlayingMusic.value = false
-    goldenHeart.pause()
-    goldenHeart.currentTime = 0
+    dontKnowWhy.pause()
+    dontKnowWhy.currentTime = 0
 }
 
 function animateBannerExit() {
@@ -47,22 +49,61 @@ function openLink(link:string) {
     window.open(link, '_blank');
 }
 
+function toggleNavMenu() {
+    showMobileNav.value = !showMobileNav.value;
+}
+
 </script>
 
 <template>
-    <header>
-        <RouterLink to="/" class="logo"><img src="/src/assets/img/logos/rd.svg" /></RouterLink>
-        <nav>
-            <!-- <RouterLink to="/projects">Projects</RouterLink> -->
+    <header :class="{'show-nav':showMobileNav}">
+        <RouterLink to="/" class="logo">
+            <img src="/src/assets/img/logos/rd.svg" />
+        </RouterLink>
+        <span class="mobile-nav-button mobile-only" :class="{'show-nav':showMobileNav}" @click="toggleNavMenu()">
+            <span v-if="showMobileNav">&#x2715;</span>
+            <span v-else>&#9776;</span>
+        </span>
+        <nav class="mobile-hide">
             <RouterLink to="/experience">Experience</RouterLink>
-            <RouterLink to="/contact-me">Contact</RouterLink>
+            <RouterLink to="/projects">Projects</RouterLink>
+            <RouterLink to="/contact-me">Contact Me</RouterLink>
 
             <!-- <RouterLink to="/experience">Music</RouterLink> -->
         </nav>
     </header>
-    <div ref="separatorBar" class="separator-bar" :class="{'slide-out-to-right':bannerExit, 'slide-in-from-left': !bannerExit}">
+    <div id="mobile-nav" 
+        :class="{
+            'show-nav':showMobileNav, 
+        }"
+    >
+        <div class="nav-links">
+            <RouterLink to="/" @click="toggleNavMenu()">Home</RouterLink>
+            <RouterLink to="/experience" @click="toggleNavMenu()">My Experience</RouterLink>
+            <RouterLink to="/projects" @click="toggleNavMenu()">My Projects</RouterLink>
+        </div>
+
+        <div class="info">
+            <h2>Reach Me</h2>
+            <a href="mailto:richardtd17@gmail.com">richardtd17@gmail.com</a>
+            <RouterLink to="/contact-me" @click="toggleNavMenu()">
+                <button class="light-round-outlined-btn">
+                    <span>Contact Me<i class="fa-solid fa-caret-right smooth-bounce-x"></i></span>
+                </button>
+            </RouterLink>
+        </div>
     </div>
-    <div id="side-menu" class="">
+    <div 
+        ref="separatorBar" 
+        class="separator-bar" 
+        :class="{
+            'slide-out-to-right':bannerExit, 
+            'slide-in-from-left': !bannerExit, 
+            'show-nav': showMobileNav
+        }"
+    >
+    </div>
+    <div id="side-menu" class="mobile-hide">
         <div class="social-media-icons-container">
             <div>
                 <img src="/src/assets/img/icons/linkedin.svg" @click="openLink('https://www.linkedin.com/in/richardtduong/')"/>
@@ -102,12 +143,13 @@ function openLink(link:string) {
             </div>
         </div>
     </div>
+    
     <main id="main-content">
         <div v-if="isPlayingMusic" class="song-title-container">
             <div class="typed">Now playing... golden heart</div>
         </div>
 
-        <section id="hero">
+        <section id="hero" class="mobile-hide">
             <img src="/src/assets/img/richard/festival-portrait-edited.jpg"/>
         </section>
 
@@ -118,8 +160,6 @@ function openLink(link:string) {
 <style scoped>
 
 header {
-    margin-left: var(--side-menu-width);
-
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -164,20 +204,10 @@ header nav a:hover {
     color: var(--thirty);
 }
 
-@media all and (min-width: 992px) {
-
-    header nav {
-        display: flex;
-        align-items: baseline;
-        justify-content: center;
-        gap: 2rem;
-    }
-}
-
 .separator-bar {
     position: relative;
 
-    width: 65%;
+    width: 85%;
 
     background: var(--thirty);
     padding: 1.25rem;
@@ -300,14 +330,15 @@ header nav a:hover {
 }
 
 #main-content {
-    margin-left: var(--side-menu-width);
     display: flex;
     gap: 2rem;
     padding: 2.5rem 1.5rem;
 }
 
 section#hero {
-    width: 40%;
+    flex-basis: 40%;
+
+    height: 600px;
 
     display: flex;
     justify-content: center;
@@ -315,12 +346,9 @@ section#hero {
 
 section#hero img {
 
-    max-height: 750px;
-
     width: 80%;
     height: auto;
     object-fit: cover; 
-
 
     box-shadow: -1rem 1rem var(--thirty);
 }
@@ -350,6 +378,156 @@ section#hero img {
     to {
         width: 100%;
     }
+}
+
+@media all and (min-width: 992px) {
+    header {
+        margin-left: var(--side-menu-width);
+    }
+
+    header nav {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    #main-content {
+        margin-left: var(--side-menu-width);
+    }
+
+    #mobile-nav.show-nav {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    #mobile-nav:not(.show-nav) {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+.mobile-nav-button {
+    font-size: 3rem;
+    color: var(--thirty);
+}
+
+.mobile-nav-button.show-nav {
+    color: var(--sixty);
+}
+
+#mobile-nav {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    background-color: var(--ten);
+    overflow-x: hidden; 
+
+    padding-top: 160px;
+    padding-inline: 2rem;
+
+    transition: 0.25s ease-in-out;
+
+    color: var(--sixty);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2rem;
+}
+
+#mobile-nav .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#mobile-nav .nav-links a {
+    font-size: 2rem;
+}
+
+#mobile-nav .info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#mobile-nav .info button {
+    padding-inline: 1rem;
+    padding-block: .5rem;
+}
+
+@media all and (max-width: 991px) {
+
+    header {
+        justify-content: space-between;
+        padding: 1.5rem 2rem .25rem 2rem;
+    }
+
+    header.show-nav {
+        width: 100%;
+        z-index: 9999;
+
+        transition: 0.25s ease-in-out;
+
+        background-color: var(--ten);
+    }
+
+    header.show-nav .logo img {
+        filter: invert(100%);
+
+        transition: 0.5s;
+    }
+
+    #mobile-nav.show-nav {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    #mobile-nav:not(.show-nav) {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    #main-content {
+        display: flex;
+        flex-direction: column;
+
+        padding: 2rem;
+    }
+
+    section#hero img {
+
+        width: 80%;
+        height: auto;
+        object-fit: cover; 
+
+        box-shadow: -1rem 1rem var(--thirty);
+    }
+
+    .separator-bar {
+        width: 100%;
+        padding: .5rem;
+    }
+
+    .separator-bar.show-nav {
+        background: var(--sixty);
+
+        z-index: 9999;
+
+        transition: 0.5s;
+    }
+
+    #side-menu {    
+        align-items: start;
+    }
+}
+
+@media all and (max-width: 768px) {
+    
 }
 
 </style>
