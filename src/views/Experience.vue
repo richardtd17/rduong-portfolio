@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 
-const workExperiences = ref({
+interface WorkExperience {
+    title: string;
+    subtitle: string;
+    description: string[];
+    img: string;
+    date: string;
+    orderClass: string;
+}
+
+const workExperiences = ref<Record<string, WorkExperience>>({
     activeherb: {
         title: 'Activeherb Technology Inc',
         subtitle: 'Software Developer',
@@ -39,8 +48,9 @@ const workExperiences = ref({
     }
 });
 
-const cardCurrentlyShown = ref('activeherb');
-const experienceCards = ref({});
+const cardCurrentlyShown = ref<string>('activeherb');
+const experienceCards = ref<Record<string, HTMLElement>>({});
+
 const cardIsOverflown = computed(() => {
     let element = experienceCards.value[cardCurrentlyShown.value];
 
@@ -52,7 +62,7 @@ onMounted(() => {
     changeCard(cardCurrentlyShown.value);
 });
 
-function changeCard(key:String) {
+function changeCard(key:string) {
 
     let workExperiencesInstance = workExperiences.value;
     let cardClass = workExperiencesInstance[key].orderClass;
@@ -76,7 +86,7 @@ function scrollCard() {
     }
 }
 
-function scrollDown(key:String) {
+function scrollDown(key:string) {
     experienceCards.value[key].scrollTop = experienceCards.value[key].scrollHeight;
 }
 
@@ -111,7 +121,13 @@ const technologies = ref({
         </div>
         <div class="body">
             <div class="experiences-container fade-in">
-                <div v-for="(item, key) in workExperiences" class="item" :class="item.orderClass" :ref="(el:HTMLElement) => {experienceCards[key] = el}" @click="changeCard(key)" @scroll="scrollCard">
+                <div v-for="(item, key) in workExperiences" class="item" :class="item.orderClass"
+                    :ref="el => {
+                        if (el) experienceCards[key] = el as HTMLElement;
+                    }"
+                    @click="changeCard(key)" @scroll="scrollCard"
+                >
+
                     <div class="experiences-content">
                         <div class="header">
                             <img v-if="item.img" :src="item.img"/>
