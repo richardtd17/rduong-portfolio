@@ -21,7 +21,7 @@ const workExperiences = ref<Record<string, WorkExperience>>({
             'Led major security updates on websites to ensure compliance with up-to-date programming practices',
             'Worked closely with the office manager to optimize shipping and packaging processing algorithm, improving the accuracy of automated shipping label generation by 35% on 500+ labels printed weekly'
         ],
-        img: '/src/assets/img/experience/activeherb-logo.jpeg',
+        img: '/img/experience/activeherb-logo.jpeg',
         date: "Mar 2023 - Oct 2023",
         orderClass: 'card-1'
     },
@@ -34,7 +34,7 @@ const workExperiences = ref<Record<string, WorkExperience>>({
             'Performed various website and algorithmic hotfixes to tailor customer experience',
             'Collaborated in weekly code review and testing for all production software'
         ],
-        img: '/src/assets/img/experience/homecoin-logo.jpeg',
+        img: '/img/experience/homecoin-logo.jpeg',
         date: "Aug 2021 - Jan 2023",
         orderClass: 'card-2'
     },
@@ -42,7 +42,7 @@ const workExperiences = ref<Record<string, WorkExperience>>({
         title: 'ITS Service Desk @ UCSD',
         subtitle: 'IT Service Desk Technician',
         description: ['Provided phone, email, and text support for network, email, phone, software, security issues, accounts, business web applications, and more using the ServiceNow platform, closing ~50-60 cases per week.'],
-        img: '/src/assets/img/experience/triton-logo.png',
+        img: '/img/experience/triton-logo.png',
         date: "Sept 2020 - Aug 2021",
         orderClass: 'card-3'
     }
@@ -145,7 +145,7 @@ const technologies = ref({
                         </ul>
                     </div>
                     <div class="scroll-icon-container" v-if="cardIsOverflown && showCardOverflowAnimation" @click="scrollDown(key)">
-                        <div class="scroll-icon"><img src="/src/assets/img/icons/arrow-down-solid.svg"/></div>
+                        <div class="scroll-icon"><img src="/img/icons/arrow-down-solid.svg"/></div>
                     </div>
                 </div>
             </div>

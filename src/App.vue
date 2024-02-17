@@ -14,8 +14,8 @@ const bannerExit = ref(false)
 const separatorBar = ref();
 const showMobileNav = ref(false);
 
-let goldenHeart = new Audio(location.href + 'src/assets/sounds/golden-heart-slowed-4.mp3')
-let dontKnowWhy = new Audio(location.href + 'src/assets/sounds/dont-know-why.mp3') 
+let goldenHeart = new Audio(location.href + '/sounds/golden-heart-slowed-4.mp3')
+let dontKnowWhy = new Audio(location.href + '/sounds/dont-know-why.mp3') 
 
 function playMusic() {
     try {
@@ -58,7 +58,7 @@ function toggleNavMenu() {
 <template>
     <header :class="{'show-nav':showMobileNav}">
         <RouterLink to="/" class="logo">
-            <img src="/src/assets/img/logos/rd.svg" />
+            <img src="/img/logos/rd.svg" />
         </RouterLink>
         <span class="mobile-nav-button mobile-only" :class="{'show-nav':showMobileNav}" @click="toggleNavMenu()">
             <span v-if="showMobileNav">&#x2715;</span>
@@ -106,7 +106,7 @@ function toggleNavMenu() {
     <div id="side-menu" class="mobile-hide">
         <div class="social-media-icons-container">
             <div>
-                <img src="/src/assets/img/icons/linkedin.svg" @click="openLink('https://www.linkedin.com/in/richardtduong/')"/>
+                <img src="/img/icons/linkedin.svg" @click="openLink('https://www.linkedin.com/in/richardtduong/')"/>
                 <div class="social-content">
                     <div class="arrow-left"></div>
                     @richardtduong
@@ -114,28 +114,28 @@ function toggleNavMenu() {
             </div>
             
             <div>
-                <img src="/src/assets/img/icons/instagram.svg" @click="openLink('https://www.instagram.com/rdtherde/?hl=en')"/>
+                <img src="/img/icons/instagram.svg" @click="openLink('https://www.instagram.com/rdtherde/?hl=en')"/>
                 <div class="social-content">
                     <div class="arrow-left"></div>
                     @rdtherde
                 </div>
             </div>
             <div>
-                <img src="/src/assets/img/icons/spotify.svg" />
+                <img src="/img/icons/spotify.svg" />
                 <div class="social-content">
                     <div class="arrow-left"></div>
                     Coming soon!
                 </div>
             </div>
             <div>
-                <img src="/src/assets/img/icons/soundcloud.svg" />
+                <img src="/img/icons/soundcloud.svg" />
                 <div class="social-content">
                     <div class="arrow-left"></div>
                     Coming soon!
                 </div>
             </div>
             <div>
-                <img src="/src/assets/img/icons/youtube.svg" />
+                <img src="/img/icons/youtube.svg" />
                 <div class="social-content">
                     <div class="arrow-left"></div>
                     Coming soon!
@@ -150,7 +150,7 @@ function toggleNavMenu() {
         </div>
 
         <section id="hero" class="mobile-hide">
-            <img src="/src/assets/img/richard/festival-portrait-edited.jpg"/>
+            <img src="/img/richard/festival-portrait-edited.jpg"/>
         </section>
 
         <RouterView @play-music="playMusic" @stop-music="stopMusic" :isPlayingMusic="isPlayingMusic"/>

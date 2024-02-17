@@ -31,7 +31,7 @@ const emit = defineEmits(['play-music', 'stop-music'])
             </h3>
         </div>
         <div class="mobile-hero mobile-only">
-            <img src="/src/assets/img/richard/film-portrait.jpeg"/>
+            <img src="/img/richard/film-portrait.jpeg"/>
         </div>
         <div class="body">
                 <p>
@@ -71,7 +71,7 @@ section#about-me .header .title {
     font-size: 3.5rem;
 }
 .animate-text-background {
-    background-image: url('/src/assets/img/hearts-background-1.jpg');
+    background-image: url('/img/hearts-background-1.jpg');
     background-position: 0px 0px;
 
     color: #3c484800 !important;
@@ -212,7 +212,7 @@ section#about-me .body .connect-button-container span {
 
 @media all and (max-width: 768px) {
     section#about-me .mobile-hero img {
-        width: 75%;
+        width: 95%;
     }
 }
 

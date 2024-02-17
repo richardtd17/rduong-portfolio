@@ -49,19 +49,19 @@ const props = defineProps<{
             <h3 class="fade-in-delay-1">Or, visit me on social media</h3>
             <div class="icons">
                 <div class="fade-in-delay-1">
-                    <img class="main" src="/src/assets/img/icons/linkedin.svg" />
+                    <img class="main" src="/img/icons/linkedin.svg" />
                 </div>
                 <div class="fade-in-delay-2">
-                    <img src="/src/assets/img/icons/instagram.svg" /> 
+                    <img src="/img/icons/instagram.svg" /> 
                 </div>
                 <div class="fade-in-delay-3">
-                    <img src="/src/assets/img/icons/spotify.svg" />
+                    <img src="/img/icons/spotify.svg" />
                 </div>
                 <div class="fade-in-delay-4">
-                    <img src="/src/assets/img/icons/soundcloud.svg" />
+                    <img src="/img/icons/soundcloud.svg" />
                 </div>
                 <div class="fade-in-delay-5">
-                    <img src="/src/assets/img/icons/youtube.svg" />
+                    <img src="/img/icons/youtube.svg" />
                 </div>
             </div>
         </div>
