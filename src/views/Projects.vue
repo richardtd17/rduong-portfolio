@@ -3,14 +3,15 @@ import { ref } from 'vue'
 
 interface Project {
     title: string;
-    subtitle: string;
+    subtitle?: string;
+    status: string;
     description: string[];
-    iconImgSrc: string;
-    imgSrcs: string[];
+    iconImgSrc?: string;
+    imgSrcs?: string[];
     links: {[key: string]: string};
 }
 
-const projects = ref<Project>([
+const projects = ref<Project[]>([
     {
         title: 'Cancelled Out App: Guilt-Free Plan Cancelling',
         subtitle: 'Lead Developer',
@@ -45,6 +46,7 @@ const projects = ref<Project>([
     },
     {
         title: 'Spotify Rock Classifier',
+        subtitle: 'Student Developer',
         status: 'Completed (Spring 2020)',
         description: [
             'Trained a model to predict what era a Rock song came from using data from the Spotify API',
