@@ -88,7 +88,8 @@ function toggleNavMenu() {
             <a href="mailto:richardtd17@gmail.com">richardtd17@gmail.com</a>
             <RouterLink to="/contact-me" @click="toggleNavMenu()">
                 <button class="light-round-outlined-btn">
-                    <span>Contact Me<i class="fa-solid fa-caret-right smooth-bounce-x"></i></span>
+                    <span>Contact Me</span>
+                    <i class="fa-solid fa-caret-right smooth-bounce-x"></i>                
                 </button>
             </RouterLink>
         </div>
@@ -458,6 +459,10 @@ section#hero img {
 #mobile-nav .info button {
     padding-inline: 1rem;
     padding-block: .5rem;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 @media all and (max-width: 991px) {
@@ -469,6 +474,9 @@ section#hero img {
 
     header.show-nav {
         width: 100%;
+
+        position: sticky;
+        
         z-index: 9999;
 
         transition: 0.25s ease-in-out;
@@ -516,6 +524,7 @@ section#hero img {
     .separator-bar.show-nav {
         background: var(--sixty);
 
+        position: sticky;
         z-index: 9999;
 
         transition: 0.5s;
