@@ -489,8 +489,11 @@ section#hero img {
 #mobile-nav .info .social-icons > .coming-soon {
     width: 10%;
     position: relative;
+}
+#mobile-nav .info .social-icons > .coming-soon {
     pointer-events: none;
 }
+
 
 #mobile-nav .info .social-icons img {
     filter: invert(100%);
