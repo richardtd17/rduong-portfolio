@@ -49,10 +49,10 @@ const props = defineProps<{
             <h3 class="fade-in-delay-1">Or, visit me on social media</h3>
             <div class="icons">
                 <div class="fade-in-delay-1">
-                    <img class="main" src="/img/icons/linkedin.svg" />
+                    <a href="https://www.linkedin.com/in/richardtduong/" target="_blank"><img class="main" src="/img/icons/linkedin.svg" /></a>
                 </div>
                 <div class="fade-in-delay-2">
-                    <img src="/img/icons/instagram.svg" /> 
+                    <a href="https://www.instagram.com/rdtherde/?hl=en" target="_blank"><img src="/img/icons/instagram.svg" /></a>
                 </div>
                 <div class="fade-in-delay-3">
                     <img src="/img/icons/spotify.svg" />

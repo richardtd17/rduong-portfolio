@@ -92,6 +92,17 @@ function toggleNavMenu() {
                     <i class="fa-solid fa-caret-right smooth-bounce-x"></i>                
                 </button>
             </RouterLink>
+
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/richardtduong/" target="_blank"><img class="main" src="/img/icons/linkedin.svg" /></a>
+                <a href="https://www.instagram.com/rdtherde/?hl=en" target="_blank"><img src="/img/icons/instagram.svg" /></a>
+                <div class="coming-soon"><img src="/img/icons/spotify.svg" /></div>
+                <div class="coming-soon"><img src="/img/icons/soundcloud.svg" /></div>
+                <div class="coming-soon"><img src="/img/icons/youtube.svg" /></div>
+            </div>
+
+            <span class="coming-soon-notifier">Coming soon</span>
+
         </div>
     </div>
     <div 
@@ -437,7 +448,7 @@ section#hero img {
     display: flex;
     flex-direction: column;
 
-    gap: 2rem;
+    gap: 4rem;
 }
 
 #mobile-nav .nav-links {
@@ -464,6 +475,43 @@ section#hero img {
     align-items: center;
     gap: 5px;
 }
+
+#mobile-nav .info .social-icons {
+    margin-top: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+#mobile-nav .info .social-icons > a,
+#mobile-nav .info .social-icons > .coming-soon {
+    width: 10%;
+    position: relative;
+    pointer-events: none;
+}
+
+#mobile-nav .info .social-icons img {
+    filter: invert(100%);
+}
+
+#mobile-nav .info .social-icons > .coming-soon::after {
+    content: '*';
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
+
+#mobile-nav .info .coming-soon-notifier {
+    font-size: 90%;
+}
+
+#mobile-nav .info .coming-soon-notifier::before {
+    content: '*';
+    margin-right: 2px;
+}
+
 
 @media all and (max-width: 991px) {
 
