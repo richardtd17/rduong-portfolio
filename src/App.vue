@@ -167,6 +167,40 @@ function toggleNavMenu() {
 
         <RouterView @play-music="playMusic" @stop-music="stopMusic" :isPlayingMusic="isPlayingMusic"/>
     </main>
+
+    <footer>
+        <div id="mobile-footer" class="mobile-only">
+            <div class="contents">
+                <section class="more-about-me">
+                    <h2>More about me</h2>
+                    <RouterLink to="/experience">Experience</RouterLink>
+                    <RouterLink to="/projects">Projects</RouterLink>
+                </section>
+
+                <section class="contact-me">
+                    <h2>Reach me</h2>
+                    <a href="mailto:richardtd17@gmail.com">richardtd17@gmail.com</a>
+                    <RouterLink to="/contact-me">
+                        <button class="light-round-outlined-btn">
+                            <span>Contact Me</span>
+                            <i class="fa-solid fa-caret-right smooth-bounce-x"></i>                
+                        </button>
+                    </RouterLink>
+                </section>
+
+                <section class="social-icons">
+                    <a href="https://www.linkedin.com/in/richardtduong/" target="_blank"><img class="main" src="/img/icons/linkedin.svg" /></a>
+                    <a href="https://www.instagram.com/rdtherde/?hl=en" target="_blank"><img src="/img/icons/instagram.svg" /></a>
+                </section>
+
+                <section class="website-info">
+                    <p>
+                        Created by me using Vue.js and Vanilla CSS!
+                    </p>
+                </section>
+            </div>
+        </div>
+    </footer>
 </template>
 
 <style scoped>
@@ -587,7 +621,58 @@ section#hero img {
 }
 
 @media all and (max-width: 768px) {
-    
+    #mobile-footer {
+        padding-block: 40px;
+        padding-inline: 24px;
+
+        background-color: var(--thirty);
+        color: var(--sixty);
+    }
+
+    #mobile-footer .contents {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    #mobile-footer .contents button {
+        padding-inline: 1rem;
+        padding-block: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    #mobile-footer .contents > section.more-about-me,
+    #mobile-footer .contents > section.contact-me {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    #mobile-footer .contents > section.website-info
+    {
+        font-size: smaller;
+    }
+
+    #mobile-footer .contents .social-icons {
+        margin-top: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+
+    #mobile-footer .contents .social-icons > a
+    {
+        width: 10%;
+    }
+
+    #mobile-footer .contents .social-icons img {
+        filter: invert(100%);
+        width: 100%;
+    }
 }
 
 </style>

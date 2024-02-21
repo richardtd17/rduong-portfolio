@@ -384,8 +384,16 @@ section#experience-section .body .technologies h4 {
 
 @media screen and (max-width: 540px) {
 
+    #experience-section .body {
+        margin-top: 0;
+    }
+
+    #experience-section .body .experiences-container {
+        margin-bottom: 75px;
+    }
+
     #experience-section .body .experiences-container .item {
-        width: 70%;
+        width: 85%;
     }
     .experiences-container .item .experiences-content{
         padding: 1rem 1rem;
@@ -394,5 +402,29 @@ section#experience-section .body .technologies h4 {
     .experiences-container .item .experiences-content .title-container {
         font-size: 90%;
     }
+
+    @keyframes spread1 {
+    0% {
+        transform: 0;
+        opacity: 100%;
+    }
+    100% {
+        transform: translateY(7.5%);
+        opacity: 95%;
+    }
+}
+
+@keyframes spread2 {
+    0% {
+        transform: 0;
+        opacity: 100%;
+
+    }
+    100% {
+        transform: translateY(15%);
+        opacity: 90%;
+
+    }
+}
 }
 </style>
