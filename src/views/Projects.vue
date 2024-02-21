@@ -209,6 +209,14 @@ const projects = ref<Project[]>([
     animation: fadeInFromBottom 3s ease-in-out;
 }
 
+@media screen and (max-width: 540px) {
+
+    .projects-container .item .project-content {
+        padding: 1rem 1rem;
+    }
+        
+}
+
 @keyframes fadeInFromBottom {
     0% {
         opacity: 0;

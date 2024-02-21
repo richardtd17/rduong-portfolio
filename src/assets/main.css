@@ -76,12 +76,6 @@ button {
     transition: all 0.3s ease-in-out;
 }
 
-.light-round-btn:hover {
-    background-color: var(--sixty);
-    border: 1px solid var(--ten);
-    color: var(--ten);
-}
-
 .light-round-outlined-btn {
     background-color: var(--sixty);
     color: var(--ten);
@@ -93,15 +87,21 @@ button {
     transition: all 0.3s ease-in-out;
 }
 
-.light-round-outlined-btn:hover {
-    background-color: var(--ten);
-    border: 1px solid transparent;
-    color: var(--sixty);
-}
-
 @media screen and (min-width: 992px) {
     .mobile-only {
         display: none !important;
+    }
+
+    .light-round-btn:hover {
+        background-color: var(--sixty);
+        border: 1px solid var(--ten);
+        color: var(--ten);
+    }
+    
+    .light-round-outlined-btn:hover {
+        background-color: var(--ten);
+        border: 1px solid transparent;
+        color: var(--sixty);
     }
 }
 
