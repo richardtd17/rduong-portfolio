@@ -1,10 +1,44 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue'
+import axios from 'axios';
 
 const props = defineProps<{
   isPlayingMusic: boolean
 }>() 
+
+const fullName = ref('')
+const email = ref('')
+const message = ref('')
+
+// Toast notification state
+const showToast = ref(false);
+const toastMessage = ref('');
+
+function submitEmailForm() {
+    const formData = {
+        fullName: fullName.value,
+        email: email.value,
+        message: message.value,
+    };
+
+    // Use Axios to send a POST request
+    axios.post('https://formspree.io/f/mleqnwnp', formData)
+        .then(response => {
+            toastMessage.value = 'Email sent successfully!';
+            showToast.value = true;
+            setTimeout(() => showToast.value = false, 5000);
+            
+            fullName.value = '';
+            email.value = '';
+            message.value = '';
+        })
+        .catch(error => {
+            toastMessage.value = 'Failed to send email.';
+            showToast.value = true;
+            setTimeout(() => showToast.value = false, 5000);
+        });
+}
 
 </script>
 
@@ -20,27 +54,25 @@ const props = defineProps<{
             <h2 class="title fade-in-delay-5">Send me a message &#8595;</h2>
 
             <form class="email-form">
+                <div v-if="showToast" class="toast-notification">
+                    {{ toastMessage }}
+                </div>
                 <div class="input-group">
-                    <label for="name" class="fade-in-delay-1">Your Name</label>
-                    <input name="name" type="text" placeholder="Enter your name" class="fade-in-delay-2"/>
+                    <label for="full-name" class="fade-in-delay-1">Your Name</label>
+                    <input name="full-name" type="text" placeholder="Enter your name" class="fade-in-delay-2" v-model="fullName"/>
                 </div>
 
                 <div class="input-group">
                     <label for="email" class="fade-in-delay-1">Your Email Address</label>
-                    <input name="email" type="email" placeholder="xyz@xyz.com" class="fade-in-delay-3"/>
-                </div>
-
-                <div class="input-group">
-                    <label for="subject" class="fade-in-delay-1">Subject</label>
-                    <input name="subject" type="text" placeholder="i.e. &quot;cool website&quot;" class="fade-in-delay-4"/>
+                    <input name="email" type="email" placeholder="xyz@xyz.com" class="fade-in-delay-3" v-model="email"/>
                 </div>
 
                 <div class="input-group">
                     <label for="message" class="fade-in-delay-1">Message</label>
-                    <textarea name="message" placeholder="Whatever you'd like!" class="fade-in-delay-5"></textarea>
+                    <textarea name="message" placeholder="Whatever you'd like!" class="fade-in-delay-4" v-model="message"></textarea>
                 </div>
                 <div class="footer">
-                    <button type="button" class="light-round-btn fade-in-delay-5">Send<i class="fa-regular fa-paper-plane"></i></button>
+                    <button @click="submitEmailForm" type="button" class="light-round-btn fade-in-delay-5">Send<i class="fa-regular fa-paper-plane"></i></button>
                 </div>
             </form>
         </div>
@@ -117,6 +149,8 @@ section#contact .body .title {
 }
 
 section#contact form.email-form {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -173,6 +207,27 @@ section#contact .social-media-container .icons img {
 
 section#contact .social-media-container .icons img.main {
     z-index: 9999;
+}
+
+section#contact .toast-notification {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 35%;
+    left: 15%;
+    width: 70%;
+    padding: 8px;
+    background-color: var(--ten);
+    color: var(--sixty);
+
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 1px var(--ten) solid;
+
+    border-radius: 5px;
+    z-index: 10000;
+    transition: all 0.5s ease-in-out;
 }
 
 </style>
