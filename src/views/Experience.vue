@@ -15,7 +15,8 @@ const workExperiences = ref<Record<string, WorkExperience>>({
         title: 'Activeherb Technology Inc',
         subtitle: 'Software Developer',
         description: [
-            'Created responsive web applications using suite of HTML5, CSS3, Vanilla Javascript, and Vue.js'
+            'Created responsive web applications using suite of HTML5, CSS3, Vanilla Javascript, and Vue.js',
+            'Managed web servers and performed regular IT duties to support web server infrastructure'
         ],
         img: '/img/experience/activeherb-logo.jpeg',
         date: "Mar 2023 - Oct 2023",
