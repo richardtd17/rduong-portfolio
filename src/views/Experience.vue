@@ -15,11 +15,7 @@ const workExperiences = ref<Record<string, WorkExperience>>({
         title: 'Activeherb Technology Inc',
         subtitle: 'Software Developer',
         description: [
-            'Developed and styled multiple user interfaces in website redesign using HTML5, CSS, Vue.js, and vanilla Javascript',
-            'Optimized legacy checkout process to reduce load speeds by 22% on average across all checkout pages',
-            'Managed web servers and performed regular IT duties to support web server infrastructure',
-            'Led major security updates on websites to ensure compliance with up-to-date programming practices',
-            'Worked closely with the office manager to optimize shipping and packaging processing algorithm, improving the accuracy of automated shipping label generation by 35% on 500+ labels printed weekly'
+            'Created responsive web applications using suite of HTML5, CSS3, Vanilla Javascript, and Vue.js'
         ],
         img: '/img/experience/activeherb-logo.jpeg',
         date: "Mar 2023 - Oct 2023",
@@ -29,10 +25,7 @@ const workExperiences = ref<Record<string, WorkExperience>>({
         title: 'homecoin.com',
         subtitle: 'Junior Software Developer',
         description: [
-            'Designed, built, and shipped responsive customer-facing and administrative web applications in Laravel and Javascript',
-            'Built and maintained tool to save 100s of admin hours visualizing and manipulating spatial data (jQuery, PHP/Laravel)',
-            'Performed various website and algorithmic hotfixes to tailor customer experience',
-            'Collaborated in weekly code review and testing for all production software'
+            'Designed, built, and shipped responsive customer-facing and administrative web applications in Laravel and Javascript'
         ],
         img: '/img/experience/homecoin-logo.jpeg',
         date: "Aug 2021 - Jan 2023",
