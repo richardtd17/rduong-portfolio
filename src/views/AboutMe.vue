@@ -26,8 +26,8 @@ const emit = defineEmits(['play-music', 'stop-music'])
             ></h2>
             <h3 class="subtitle fade-in-delay-1">
                 <span>Software Developer</span>
-                <span>and</span>
-                <span @mouseover="emit('play-music')" @mouseleave="emit('stop-music')">Singer/Songwriter</span>
+                <!-- <span>and</span> -->
+                <!-- <span @mouseover="emit('play-music')" @mouseleave="emit('stop-music')">Singer/Songwriter</span> -->
             </h3>
         </div>
         <div class="mobile-hero mobile-only">
