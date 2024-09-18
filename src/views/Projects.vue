@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue';
+
+
+onMounted(() => {
+    window.addEventListener('keydown', handleKeydown);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('keydown', handleKeydown);
+});
 
 interface Project {
     title: string;
@@ -8,10 +17,30 @@ interface Project {
     description: string[];
     iconImgSrc?: string;
     imgSrcs?: string[];
-    links: {[key: string]: string};
+    links: { [key: string]: string };
 }
 
 const projects = ref<Project[]>([
+    {
+        title: 'activeherb.com Web Pages',
+        subtitle: 'Full Stack Developer',
+        status: 'Completed',
+        description: [
+            'Implemented reactive webpages for activeherb.com',
+            'Technologies: Vue.js, Javascript, HTML, CSS, Mivascript'
+        ],
+        imgSrcs: [
+            '/img/projects/activeherb-website/checkout-page.png',
+            '/img/projects/activeherb-website/user-info.jpeg',
+            '/img/projects/activeherb-website/modern-essentials-productlist.png',
+            '/img/projects/activeherb-website/homepage.png',
+            '/img/projects/activeherb-website/quality-assurance-example.png',
+        ],
+        iconImgSrc: '/img/experience/activeherb-logo.jpeg',
+        links: {
+            github: ''
+        }
+    },
     {
         title: 'Cancelled Out App: Guilt-Free Plan Cancelling',
         subtitle: 'Lead Developer',
@@ -29,7 +58,6 @@ const projects = ref<Project[]>([
             github: ''
         }
     },
-
     {
         title: 'Project MAI',
         subtitle: 'Student Developer on UCSD Return to Learn Research Team',
@@ -57,7 +85,48 @@ const projects = ref<Project[]>([
             github: 'https://github.com/ucsd-dsc-arts/dsc160-midterm-group17'
         }
     }
-])
+]);
+
+const isModalOpen = ref(false);
+const selectedProjectImages = ref<string[]>([]);
+const selectedImageIndex = ref(0);
+
+const openModal = (images: string[], index: number) => {
+    selectedProjectImages.value = images;
+    selectedImageIndex.value = index;
+    isModalOpen.value = true;
+};
+
+const closeModal = () => {
+    isModalOpen.value = false;
+    selectedProjectImages.value = [];
+    selectedImageIndex.value = 0;
+};
+
+const prevImage = () => {
+    if (selectedImageIndex.value > 0) {
+        selectedImageIndex.value--;
+    } else {
+        selectedImageIndex.value = selectedProjectImages.value.length - 1;
+    }
+};
+
+const nextImage = () => {
+    if (selectedImageIndex.value < selectedProjectImages.value.length - 1) {
+        selectedImageIndex.value++;
+    } else {
+        selectedImageIndex.value = 0;
+    }
+};
+
+const handleKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'ArrowLeft') {
+        prevImage();
+    } else if (event.key === 'ArrowRight') {
+        nextImage();
+    }
+};
+
 </script>
 
 <template>
@@ -65,26 +134,27 @@ const projects = ref<Project[]>([
         <div class="title-container fade-in-from-right">
             <h1>Projects</h1>
         </div>
+
         <div class="projects-container">
-            <div v-for="project in projects" class="item">
+            <div v-for="(project, projectIndex) in projects" :key="projectIndex" class="item">
                 <div class="project-content">
                     <div class="header">
                         <img v-if="project.iconImgSrc" class="icon" :src="project.iconImgSrc">
                         <div class="title-container">
                             <h2>{{ project.title }}</h2>
-                            <i>{{project.status}}</i>
+                            <i>{{ project.status }}</i>
                             <i>{{ project.subtitle }}</i>
                         </div>
                     </div>
 
                     <ul class="description">
-                        <li v-for="line in project.description">
+                        <li v-for="(line, lineIndex) in project.description" :key="lineIndex">
                             {{ line }}
                         </li>
                     </ul>
 
-                    <div class="images">
-                        <img v-for="imgSrc in project.imgSrcs" :src="imgSrc"/>
+                    <div v-if="project.imgSrcs && project.imgSrcs.length > 0" class="gallery-icon">
+                        <i class="fa-solid fa-images" @click="openModal(project.imgSrcs, 0)"></i>
                     </div>
 
                     <div class="links">
@@ -95,6 +165,17 @@ const projects = ref<Project[]>([
                 </div>
             </div>
         </div>
+
+        <div v-if="isModalOpen" class="modal-overlay" @click.self="closeModal">
+            <div class="modal">
+                <span class="arrow left-arrow" @click="prevImage">&#10094;</span>
+                
+                <img :src="selectedProjectImages[selectedImageIndex]" alt="Project Image" />
+
+                <span class="arrow right-arrow" @click="nextImage">&#10095;</span>
+            </div>
+        </div>
+
     </section>
 </template>
 
@@ -102,12 +183,9 @@ const projects = ref<Project[]>([
 
 #projects-section {
     flex-basis: 45%;
-    
     display: flex;
-
     flex-direction: column;
     gap: 2rem;
-
     height: 100%;
 }
 #projects-section > .title-container {
@@ -118,16 +196,13 @@ const projects = ref<Project[]>([
 .projects-container {
     width: 100%;
     display: flex;
-    
     flex-direction: column;
-
     gap: 1rem;
 }
 
 .projects-container .item {
     display: flex;
     flex-direction: column;
-
     justify-content: center;
     gap: 1rem;
 }
@@ -137,7 +212,6 @@ const projects = ref<Project[]>([
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
     padding: 1rem 2rem;
-
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -146,7 +220,6 @@ const projects = ref<Project[]>([
 .projects-container .item .project-content .header {
     display: flex;
     gap: 16px;
-
     align-items: center;
 }
 
@@ -184,12 +257,12 @@ const projects = ref<Project[]>([
 .projects-container .item .project-content .images img {
     width: 25%;
     height: auto;
+    cursor: pointer;
 }
 
 .projects-container .item .project-content .links {
     display: flex;
     gap: 1rem;
-
     justify-content: flex-end;
 }
 
@@ -208,13 +281,77 @@ const projects = ref<Project[]>([
 .projects-container .item:nth-child(3) .project-content {
     animation: fadeInFromBottom 3s ease-in-out;
 }
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.gallery-icon {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 2rem;
+}
+.gallery-icon i {
+    cursor: pointer;
+}
+
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.arrow {
+    position: fixed; /* Position arrows relative to the viewport */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    z-index: 1001;
+}
+
+.left-arrow {
+    left: 20px; /* Adjust the distance from the left side */
+}
+
+.right-arrow {
+    right: 20px; /* Adjust the distance from the right side */
+}
+
+
 
 @media screen and (max-width: 540px) {
-
     .projects-container .item .project-content {
         padding: 1rem 1rem;
     }
-        
 }
 
 @keyframes fadeInFromBottom {
